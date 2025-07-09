@@ -1,7 +1,11 @@
+import Button from "@/components/ui/button";
+import HomeGreetingCard from "@/components/ui/homeheader";
 import ScreenWrapper from "@/components/ui/wrapper";
 import { height } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text } from "react-native";
+import { router } from "expo-router";
+import { Plus } from "lucide-react-native";
+import { Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
@@ -18,7 +22,29 @@ export default function HomeScreen() {
           height: height,
         }}
       />
-      <Text>Welcome</Text>
+      <HomeGreetingCard />
+      <Button onPress={() => router.push("/screens/addhabitchain")}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+          }}
+        >
+          <Plus size={18} color='#ffffff' />
+          <Text
+            style={{
+              color: "#fff",
+              fontWeight: "600",
+              fontSize: 15,
+              textTransform: "lowercase",
+            }}
+          >
+            add new chain
+          </Text>
+        </View>
+      </Button>
     </ScreenWrapper>
   );
 }

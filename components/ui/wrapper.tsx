@@ -7,6 +7,7 @@ const ScreenWrapper = ({ children }: { children: React.ReactNode }) => {
       style={{
         flex: 1,
         backgroundColor: "#f8f9fa",
+        
         padding: 16,
       }}
     >

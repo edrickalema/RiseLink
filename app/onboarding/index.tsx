@@ -117,38 +117,44 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                     entering={FadeInUp.duration(500)}
                     style={styles.title}
                   >
-                    What's your name?
+                    what's your name? ✍️
                   </Animated.Text>
                   <Animated.Text
                     entering={FadeInUp.delay(200).duration(500)}
                     style={styles.subtitle}
                   >
-                    Let's personalize your experience
+                    let’s make this journey personal to you.
                   </Animated.Text>
                 </View>
 
                 <View style={styles.inputContainer}>
                   <Animated.View entering={FadeInUp.delay(400).duration(500)}>
                     <TextInput
-                      style={styles.textInput}
+                      style={[
+                        styles.textInput,
+                        name.length > 0 && styles.textInputActive,
+                      ]}
                       value={name}
                       onChangeText={setName}
-                      placeholder='Enter your name'
+                      placeholder='type your name here...'
                       placeholderTextColor='#9ca3af'
                     />
                   </Animated.View>
 
                   <Animated.View entering={FadeInUp.delay(600).duration(500)}>
-                    <TouchableOpacity
+                    <Button
+                    variant="default"
+                    // @ts-ignore
                       style={[
                         styles.button,
                         !name.trim() && styles.buttonDisabled,
                       ]}
                       onPress={() => setStep(1)}
                       disabled={!name.trim()}
+                      size="lg"
                     >
-                      <Text style={styles.buttonText}>Continue </Text>
-                    </TouchableOpacity>
+                      <Text style={styles.buttonText}>continue →</Text>
+                    </Button>
                   </Animated.View>
                 </View>
               </Animated.View>
@@ -295,6 +301,14 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     gap: 16,
+  },
+  textInputActive: {
+    borderColor: "#3b82f6",
+    shadowColor: "#3b82f6",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 3,
   },
 
   bellContainer: {

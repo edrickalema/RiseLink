@@ -29,7 +29,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   variant = "default",
-  size = "default",
+  size = "lg",
   children,
   onPress,
   disabled,
@@ -68,6 +68,8 @@ const Button: React.FC<ButtonProps> = ({
 const styles = StyleSheet.create({
   base: {
     width: "100%",
+    display: "flex",
+    justifyContent: "center",
     padding: 16,
     backgroundColor: "#3b82f6",
     borderRadius: 8,
