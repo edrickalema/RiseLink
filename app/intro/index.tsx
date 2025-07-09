@@ -114,7 +114,7 @@ export default function IntroScreen() {
       setCurrentStep(currentStep + 1);
     } else {
       // Simulate setting value in mock storage
-      mockStorage[INTRO_COMPLETE_KEY] = "true";
+      mockStorage[INTRO_COMPLETE_KEY] = "false";
       router.replace("/onboarding");
     }
   };

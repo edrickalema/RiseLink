@@ -1,9 +1,9 @@
 import Button from "@/components/ui/button";
 import { LinearGradient } from "expo-linear-gradient";
 import { router, useNavigation } from "expo-router";
-import { Link } from "lucide-react-native";
+import { Clock, Link, Target, TrendingUp, Zap } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
-import { Animated, Dimensions, Text, View } from "react-native";
+import { Animated, Dimensions, StyleSheet, Text, View } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -12,16 +12,12 @@ export default function WelcomeScreen() {
   const [slideAnim] = useState(new Animated.Value(30));
   const [scaleAnim] = useState(new Animated.Value(0.9));
   const [pulseAnim] = useState(new Animated.Value(1));
-
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
+    navigation.setOptions({ headerShown: false });
   }, []);
 
-  // Animate in content when component mounts
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -42,7 +38,6 @@ export default function WelcomeScreen() {
     ]).start();
   }, []);
 
-  // Pulse animation for thumbs up icon
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
@@ -66,7 +61,7 @@ export default function WelcomeScreen() {
   };
 
   return (
-    <View className='flex-1 flex justify-center relative p-4 '>
+    <View className='flex-1 flex justify-center relative p-4'>
       {/* Background Gradient */}
       <LinearGradient
         colors={["#f8fafc", "#f1f5f9", "#f7f8f9"]}
@@ -77,7 +72,7 @@ export default function WelcomeScreen() {
           left: 0,
           right: 0,
           top: 0,
-          height: height,
+          height,
         }}
       />
 
@@ -93,7 +88,6 @@ export default function WelcomeScreen() {
           backgroundColor: "rgba(251, 146, 60, 0.1)",
         }}
       />
-
       <View
         style={{
           position: "absolute",
@@ -108,45 +102,55 @@ export default function WelcomeScreen() {
 
       {/* Main Content */}
       <View className='flex-1'>
-        {/* Trophy and Laurel Wreath Section */}
         <Animated.View
           style={{
             opacity: fadeAnim,
             transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
           }}
-          className='items-center mb-8'
+          className='items-center mb-8 '
         >
-          {/* Thumbs Up Icon with Pulse Animation */}
           <Animated.View className='mb-4'>
             <View className='bg-white rounded-full p-4 shadow-lg'>
-              <Link className='text-6xl' size={48} />
+              <Link size={48} color='#0f172a' />
             </View>
           </Animated.View>
 
-          <Text className='text-3xl font-bold  bg-clip-text'>Welcome</Text>
-
+          <Text className='text-3xl font-bold text-slate-800'>Welcome</Text>
           <Text className='text-muted-foreground text-lg'>
             Build better habits, one link at a time
           </Text>
         </Animated.View>
 
-        {/* Main Message */}
+        {/* Features */}
         <Animated.View
           style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            paddingVertical: 24,
             opacity: fadeAnim,
             transform: [{ translateY: slideAnim }],
           }}
-          className='mb-12'
         >
-          <Text className='text-2xl font-bold text-gray-800 text-center leading-8 mb-4'>
-            Let's start with some
-          </Text>
-          <Text className='text-2xl font-bold text-gray-800 text-center leading-8 mb-4'>
-            questions to get your
-          </Text>
-          <Text className='text-2xl font-bold text-gray-800 text-center leading-8'>
-            customized plan!
-          </Text>
+          <View style={styles.featureCard}>
+            <Target size={32} color='#3b82f6' className='mx-auto mb-2' />
+            <Text className='text-sm font-medium'>Goal Tracking</Text>
+          </View>
+
+          <View style={styles.featureCard}>
+            <TrendingUp size={32} color='#22c55e' className='mx-auto mb-2' />
+            <Text style={styles.featureText}>Analytics</Text>
+          </View>
+
+          <View style={styles.featureCard}>
+            <Zap size={32} color='#eab308' className='mx-auto mb-2' />
+            <Text className='text-sm font-medium'>Smart Timer</Text>
+          </View>
+
+          <View style={styles.featureCard}>
+            <Clock size={32} color='#a855f7' className='mx-auto mb-2' />
+            <Text className='text-sm font-medium'>Streak Building</Text>
+          </View>
         </Animated.View>
 
         {/* Get Started Button */}
@@ -161,6 +165,7 @@ export default function WelcomeScreen() {
             variant='default'
             size='lg'
             onPress={handleGetStarted}
+            // @ts-ignore
             className='bg-slate-800 rounded-full py-4 shadow-lg'
           >
             <Text className='text-white text-lg font-semibold'>
@@ -206,3 +211,20 @@ export default function WelcomeScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  featureCard: {
+    width: "48%",
+    backgroundColor: "#f8fafc",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
+    alignItems: "center",
+  },
+  featureText: {
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+});
