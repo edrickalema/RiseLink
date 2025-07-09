@@ -1,7 +1,11 @@
 import { height, predefinedHabits } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
+import * as Notifications from "expo-notifications";
 import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
+
+import Button from "@/components/ui/button";
+import { Bell } from "lucide-react-native";
 import {
   Dimensions,
   SafeAreaView,
@@ -21,6 +25,16 @@ interface OnboardingScreenProps {
 }
 
 const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
+  const requestNotifications = async () => {
+    const { status } = await Notifications.requestPermissionsAsync();
+    if (status === "granted") {
+      setStep(2);
+    } else {
+      // Optional: Show a warning or fallback
+      alert("Please enable notifications to get timely habit reminders.");
+    }
+  };
+
   const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({
@@ -146,6 +160,40 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                 style={styles.stepContainer}
               >
                 <View style={styles.textCenter}>
+                  <Animated.View
+                    entering={FadeInUp.duration(500)}
+                    style={styles.bellContainer}
+                  >
+                    <Bell size={36} color='#10b981' />
+                  </Animated.View>
+                  <Animated.Text
+                    entering={FadeInUp.duration(500)}
+                    style={styles.title}
+                  >
+                    Stay On Track
+                  </Animated.Text>
+                  <Animated.Text
+                    entering={FadeInUp.delay(200).duration(500)}
+                    style={styles.subtitle}
+                  >
+                    Enable notifications to get daily habit chain reminders
+                  </Animated.Text>
+                </View>
+
+                <Animated.View entering={FadeInUp.delay(400).duration(500)}>
+                  <Button onPress={requestNotifications}>
+                    <Text style={styles.buttonText}>Allow Notifications</Text>
+                  </Button>
+                </Animated.View>
+              </Animated.View>
+            )}
+
+            {step === 2 && (
+              <Animated.View
+                entering={FadeIn.duration(600)}
+                style={styles.stepContainer}
+              >
+                <View style={styles.textCenter}>
                   <Animated.Text
                     entering={FadeInUp.duration(500)}
                     style={styles.title}
@@ -247,6 +295,23 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     gap: 16,
+  },
+
+  bellContainer: {
+    backgroundColor: "#e0f7ef",
+    borderRadius: 16,
+    padding: 20,
+    alignItems: "center",
+    marginBottom: 16,
+    flexDirection: "row",
+    gap: 16,
+    alignSelf: "center",
+    shadowColor: "#10b981",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    elevation: 2,
+    maxWidth: 340,
   },
   textInput: {
     width: "100%",
