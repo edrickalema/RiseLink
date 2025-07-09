@@ -25,7 +25,7 @@ export const ChainDetailsForm: React.FC<ChainDetailsFormProps> = ({
             style={styles.input}
             value={chainName}
             onChangeText={onNameChange}
-            placeholder='e.g., Morning Routine'
+            placeholder='e.g., morning routine'
             placeholderTextColor='#9ca3af'
           />
         </View>
@@ -36,7 +36,7 @@ export const ChainDetailsForm: React.FC<ChainDetailsFormProps> = ({
             style={styles.input}
             value={chainDescription}
             onChangeText={onDescriptionChange}
-            placeholder='e.g., Start your day with energy'
+            placeholder='e.g., start your day with energy'
             placeholderTextColor='#9ca3af'
             multiline
             numberOfLines={2}

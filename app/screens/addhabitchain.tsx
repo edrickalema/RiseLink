@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from "react-native";
 
-
 import { CurrentHabit, Habit, HabitChain } from "@/types";
 import { AddHabitForm } from "./components/chainBuilder/addHabitForm";
 import { ChainDetailsForm } from "./components/chainBuilder/chainDetailsForm";
@@ -231,7 +230,7 @@ const ChainBuilder: React.FC<ChainBuilderProps> = ({ onSave }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8fafc",
+    backgroundColor: "#fff",
   },
   content: {
     padding: 20,
