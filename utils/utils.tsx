@@ -1,3 +1,6 @@
+import { Dimensions } from "react-native";
+import Animated from "react-native-reanimated";
+
 export const introSteps = [
   {
     id: 1,
@@ -20,3 +23,18 @@ export const introSteps = [
     isLastStep: true,
   },
 ];
+
+// Get screen dimensions
+export const width = Dimensions.get("window").width;
+export const height = Dimensions.get("window").height;
+
+// Predefined habits for the onboarding process
+export const predefinedHabits = [
+  { id: "fitness", label: "Fitness", emoji: "💪" },
+  { id: "focus", label: "Deep Work", emoji: "🧠" },
+  { id: "faith", label: "Prayer / Faith", emoji: "🙏" },
+  { id: "health", label: "Mental Clarity", emoji: "🧘" },
+  { id: "learning", label: "Learning", emoji: "📚" },
+  { id: "custom", label: "Something Else", emoji: "✨" },
+];
+

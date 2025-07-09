@@ -115,7 +115,7 @@ export default function IntroScreen() {
     } else {
       // Simulate setting value in mock storage
       mockStorage[INTRO_COMPLETE_KEY] = "false";
-      router.replace("/onboarding");
+      router.replace("/welcome");
     }
   };
 

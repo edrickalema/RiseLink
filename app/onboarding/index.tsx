@@ -1,256 +1,334 @@
-import Button from "@/components/ui/button";
+import { height, predefinedHabits } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
-import { router, useNavigation } from "expo-router";
-import { Clock, Link, Target, TrendingUp, Zap } from "lucide-react-native";
+import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-  Animated,
   Dimensions,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
+import Animated, { FadeIn, FadeInUp, ZoomIn } from "react-native-reanimated";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
-export default function WelcomeScreen() {
-  const [fadeAnim] = useState(new Animated.Value(0));
-  const [slideAnim] = useState(new Animated.Value(30));
-  const [scaleAnim] = useState(new Animated.Value(0.9));
-  const [pulseAnim] = useState(new Animated.Value(1));
+interface OnboardingScreenProps {
+  onComplete: (userData: { name: string; goals: string[] }) => void;
+}
+
+const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
   const navigation = useNavigation();
-
   useEffect(() => {
-    navigation.setOptions({ headerShown: false });
+    navigation.setOptions({
+      headerShown: false,
+    });
   }, []);
 
-  useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, []);
+  const [step, setStep] = useState(0); // Start from step 0 (name input)
+  const [name, setName] = useState("");
+  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
 
-  useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, {
-          toValue: 1.1,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(pulseAnim, {
-          toValue: 1,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  }, []);
+  const goals = [
+    { id: "health", label: "Health & Fitness", icon: "💪" },
+    { id: "productivity", label: "Productivity", icon: "⚡" },
+    { id: "mindfulness", label: "Mindfulness", icon: "🧘" },
+    { id: "learning", label: "Learning", icon: "📚" },
+    { id: "creativity", label: "Creativity", icon: "🎨" },
+    { id: "relationships", label: "Relationships", icon: "❤️" },
+  ];
 
-  const handleGetStarted = () => {
-    // @ts-ignore
-    router.replace("/questions");
+  const toggleGoal = (goalId: string) => {
+    setSelectedGoals((prev) =>
+      prev.includes(goalId)
+        ? prev.filter((g) => g !== goalId)
+        : [...prev, goalId]
+    );
+  };
+
+  const handleComplete = () => {
+    onComplete({ name, goals: selectedGoals });
   };
 
   return (
-    <View style={styles.container}>
-      {/* Background Gradient */}
+    <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={["#f8fafc", "#f1f5f9", "#f7f8f9"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={StyleSheet.absoluteFill}
-      />
-
-      {/* Decorative Background Elements */}
-      <View
         style={{
           position: "absolute",
-          top: height * 0.1,
-          right: -20,
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          backgroundColor: "rgba(251, 146, 60, 0.1)",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: height,
         }}
-      />
-      <View
-        style={{
-          position: "absolute",
-          bottom: height * 0.15,
-          left: -30,
-          width: 80,
-          height: 80,
-          borderRadius: 40,
-          backgroundColor: "rgba(245, 158, 11, 0.08)",
-        }}
-      />
-
-      {/* Scrollable Central Content */}
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
       >
-        {/* Animated Welcome Section */}
-        <Animated.View
-          style={[
-            {
-              opacity: fadeAnim,
-              transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
-            },
-            styles.centered,
-          ]}
-        >
-          <Animated.View style={{ marginBottom: 16 }}>
-            <View className='bg-white rounded-full p-4 shadow-lg'>
-              <Link size={48} color='#0f172a' />
-            </View>
-          </Animated.View>
-
-          <Text className='text-3xl font-bold text-slate-800'>Welcome</Text>
-          <Text className='text-muted-foreground text-lg text-center mt-2'>
-            Build better habits, one link at a time
-          </Text>
-        </Animated.View>
-
-        {/* Features Grid */}
-        <Animated.View
-          style={[
-            styles.featureGrid,
-            {
-              opacity: fadeAnim,
-              transform: [{ translateY: slideAnim }],
-            },
-          ]}
-        >
-          <View style={styles.featureCard}>
-            <Target size={32} color='#3b82f6' />
-            <Text style={styles.featureText}>Goal Tracking</Text>
-          </View>
-          <View style={styles.featureCard}>
-            <TrendingUp size={32} color='#22c55e' />
-            <Text style={styles.featureText}>Analytics</Text>
-          </View>
-          <View style={styles.featureCard}>
-            <Zap size={32} color='#eab308' />
-            <Text style={styles.featureText}>Smart Timer</Text>
-          </View>
-          <View style={styles.featureCard}>
-            <Clock size={32} color='#a855f7' />
-            <Text style={styles.featureText}>Streak Building</Text>
-          </View>
-        </Animated.View>
-
-        {/* Get Started Button */}
+        {/* Animated Background Elements */}
         <Animated.View
           style={{
-            opacity: fadeAnim,
-            transform: [{ translateY: slideAnim }],
-            width: "100%",
-            paddingHorizontal: 20,
-            marginTop: 20,
+            position: "absolute",
+            top: height * 0.1,
+            right: -50,
+            width: 200,
+            height: 200,
+            borderRadius: 100,
+            backgroundColor: "rgba(99, 102, 241, 0.1)",
           }}
-        >
-          <Button variant='default' size='lg' onPress={handleGetStarted}>
-            <Text className='text-white text-lg font-semibold'>
-              Get Started
-            </Text>
-          </Button>
-        </Animated.View>
-      </ScrollView>
+        />
 
-      {/* Floating Decorative Dots */}
-      <Animated.View
-        style={{
-          position: "absolute",
-          top: "25%",
-          left: "15%",
-          opacity: fadeAnim,
-        }}
-      >
-        <View className='w-2 h-2 bg-orange-400 rounded-full' />
-      </Animated.View>
+        <Animated.View
+          style={{
+            position: "absolute",
+            bottom: height * 0.04,
+            left: -20,
+            width: 150,
+            height: 150,
+            borderRadius: 75,
+            backgroundColor: "rgba(168, 85, 247, 0.08)",
+          }}
+        />
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.content}>
+            {step === 0 && (
+              <Animated.View
+                entering={FadeIn.duration(600)}
+                style={styles.stepContainer}
+              >
+                <View style={styles.textCenter}>
+                  <Animated.Text
+                    entering={FadeInUp.duration(500)}
+                    style={styles.title}
+                  >
+                    What's your name?
+                  </Animated.Text>
+                  <Animated.Text
+                    entering={FadeInUp.delay(200).duration(500)}
+                    style={styles.subtitle}
+                  >
+                    Let's personalize your experience
+                  </Animated.Text>
+                </View>
 
-      <Animated.View
-        style={{
-          position: "absolute",
-          top: "70%",
-          right: "20%",
-          opacity: fadeAnim,
-        }}
-      >
-        <View className='w-3 h-3 bg-yellow-400 rounded-full' />
-      </Animated.View>
+                <View style={styles.inputContainer}>
+                  <Animated.View entering={FadeInUp.delay(400).duration(500)}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={name}
+                      onChangeText={setName}
+                      placeholder='Enter your name'
+                      placeholderTextColor='#9ca3af'
+                    />
+                  </Animated.View>
 
-      <Animated.View
-        style={{
-          position: "absolute",
-          bottom: "30%",
-          left: "25%",
-          opacity: fadeAnim,
-        }}
-      >
-        <View className='w-2 h-2 bg-orange-300 rounded-full' />
-      </Animated.View>
-    </View>
+                  <Animated.View entering={FadeInUp.delay(600).duration(500)}>
+                    <TouchableOpacity
+                      style={[
+                        styles.button,
+                        !name.trim() && styles.buttonDisabled,
+                      ]}
+                      onPress={() => setStep(1)}
+                      disabled={!name.trim()}
+                    >
+                      <Text style={styles.buttonText}>Continue </Text>
+                    </TouchableOpacity>
+                  </Animated.View>
+                </View>
+              </Animated.View>
+            )}
+
+            {step === 1 && (
+              <Animated.View
+                entering={FadeIn.duration(600)}
+                style={styles.stepContainer}
+              >
+                <View style={styles.textCenter}>
+                  <Animated.Text
+                    entering={FadeInUp.duration(500)}
+                    style={styles.title}
+                  >
+                    👋, {name}
+                  </Animated.Text>
+                  <Animated.Text
+                    entering={FadeInUp.delay(200).duration(500)}
+                    style={styles.title}
+                  >
+                    What are your goals?
+                  </Animated.Text>
+                  <Animated.Text
+                    entering={FadeInUp.delay(400).duration(500)}
+                    style={styles.subtitle}
+                  >
+                    Select areas you'd like to improve
+                  </Animated.Text>
+                </View>
+
+                <View style={styles.goalsGrid}>
+                  {predefinedHabits.map((goal, index) => (
+                    <Animated.View
+                      key={goal.id}
+                      entering={ZoomIn.delay(index * 100).duration(400)}
+                    >
+                      <TouchableOpacity
+                        onPress={() => toggleGoal(goal.id)}
+                        style={[
+                          styles.goalButton,
+                          selectedGoals.includes(goal.id) &&
+                            styles.goalButtonSelected,
+                        ]}
+                      >
+                        <Text style={styles.goalIcon}>{goal.emoji}</Text>
+                        <Text style={styles.goalLabel}>{goal.label}</Text>
+                      </TouchableOpacity>
+                    </Animated.View>
+                  ))}
+                </View>
+
+                <Animated.View entering={FadeInUp.delay(600).duration(500)}>
+                  <TouchableOpacity
+                    style={[
+                      styles.button,
+                      selectedGoals.length === 0 && styles.buttonDisabled,
+                    ]}
+                    onPress={handleComplete}
+                    disabled={selectedGoals.length === 0}
+                  >
+                    <Text style={styles.buttonText}>
+                      Start Building Habits →
+                    </Text>
+                  </TouchableOpacity>
+                </Animated.View>
+              </Animated.View>
+            )}
+          </View>
+        </ScrollView>
+      </LinearGradient>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
-    // justifyContent: "center",
-    // alignItems: "center",
+  },
+  gradient: {
+    flex: 1,
   },
   scrollContainer: {
     flexGrow: 1,
     justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 40,
-    paddingHorizontal: 20,
+    padding: 16,
+  },
+  content: {
+    maxWidth: 400,
     width: "100%",
+    alignSelf: "center",
   },
-  centered: {
+  stepContainer: {
+    gap: 24,
+  },
+  textCenter: {
     alignItems: "center",
-    marginBottom: 32,
+    gap: 8,
   },
-  featureGrid: {
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#1f2937",
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#6b7280",
+    textAlign: "center",
+  },
+  inputContainer: {
+    gap: 16,
+  },
+  textInput: {
+    width: "100%",
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#d1d5db",
+    borderRadius: 8,
+    backgroundColor: "#ffffff",
+    fontSize: 18,
+    textAlign: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  button: {
+    width: "100%",
+    padding: 16,
+    backgroundColor: "#3b82f6",
+    borderRadius: 8,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  buttonDisabled: {
+    backgroundColor: "#9ca3af",
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  goalsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
+    gap: 12,
     justifyContent: "space-between",
-    rowGap: 16,
-    columnGap: 12,
-    paddingHorizontal: 20,
-    width: "100%",
   },
-  featureCard: {
-    width: "47%",
-    backgroundColor: "#f8fafc",
-    borderRadius: 12,
+  goalButton: {
+    width: (width - 56) / 2, // Responsive width accounting for padding and gap
     padding: 16,
-    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#d1d5db",
+    borderRadius: 8,
     alignItems: "center",
+    backgroundColor: "#ffffff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
-  featureText: {
-    marginTop: 8,
+  goalButtonSelected: {
+    borderColor: "#3b82f6",
+    backgroundColor: "#dbeafe",
+    transform: [{ scale: 1.02 }],
+  },
+  goalIcon: {
+    fontSize: 24,
+    marginBottom: 8,
+  },
+  goalLabel: {
     fontSize: 14,
     fontWeight: "500",
+    color: "#374151",
     textAlign: "center",
   },
 });
+
+export default OnboardingScreen;
