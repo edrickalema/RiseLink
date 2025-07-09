@@ -1,18 +1,24 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 interface NotificationButtonProps {
   notificationTime: string;
   onPress: () => void;
+  disabled?: boolean;
 }
 
 export const NotificationButton: React.FC<NotificationButtonProps> = ({
   notificationTime,
   onPress,
+  disabled = false,
 }) => {
   return (
-    <TouchableOpacity style={styles.notificationButton} onPress={onPress}>
+    <TouchableOpacity
+      disabled={disabled}
+      style={styles.notificationButton}
+      onPress={onPress}
+    >
       <LinearGradient
         colors={["#6366f1", "#4f46e5"]}
         style={styles.notificationGradient}
@@ -39,6 +45,5 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 16,
     fontWeight: "600",
-  }
-
-})
+  },
+});

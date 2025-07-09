@@ -5,13 +5,13 @@ import { router, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 
 import Button from "@/components/ui/button";
+import TextInputField from "@/components/ui/text-input";
 import { Bell } from "lucide-react-native";
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -129,29 +129,26 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
 
                 <View style={styles.inputContainer}>
                   <Animated.View entering={FadeInUp.delay(400).duration(500)}>
-                    <TextInput
-                      style={[
-                        styles.textInput,
-                        name.length > 0 && styles.textInputActive,
-                      ]}
-                      value={name}
-                      onChangeText={setName}
+                    <TextInputField
                       placeholder='type your name here...'
                       placeholderTextColor='#9ca3af'
+                      value={name}
+                      onChangeText={setName}
+                      style={[name.length > 0 && styles.textInputActive]}
                     />
                   </Animated.View>
 
                   <Animated.View entering={FadeInUp.delay(600).duration(500)}>
                     <Button
-                    variant="default"
-                    // @ts-ignore
+                      variant='default'
+                      // @ts-ignore
                       style={[
                         styles.button,
                         !name.trim() && styles.buttonDisabled,
                       ]}
                       onPress={() => setStep(1)}
                       disabled={!name.trim()}
-                      size="lg"
+                      size='lg'
                     >
                       <Text style={styles.buttonText}>continue →</Text>
                     </Button>
@@ -327,24 +324,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     maxWidth: 340,
   },
-  textInput: {
-    width: "100%",
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#d1d5db",
-    borderRadius: 8,
-    backgroundColor: "#ffffff",
-    fontSize: 18,
-    textAlign: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
-  },
+
   button: {
     width: "100%",
     padding: 16,

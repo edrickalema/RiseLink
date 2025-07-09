@@ -30,6 +30,9 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       transparent
       animationType='slide'
       onRequestClose={onClose}
+      presentationStyle='overFullScreen'
+      hardwareAccelerated
+      statusBarTranslucent
     >
       <View style={styles.overlay}>
         <View style={styles.modal}>

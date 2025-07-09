@@ -196,12 +196,19 @@ const ChainBuilder: React.FC<ChainBuilderProps> = ({ onSave }) => {
         />
 
         {habits.length > 0 ? (
-          <ChainPreview
-            habits={habits}
-            totalDuration={totalDuration}
-            onRemoveHabit={removeHabit}
-            onMoveHabit={moveHabit}
-          />
+          <>
+            <ChainPreview
+              habits={habits}
+              totalDuration={totalDuration}
+              onRemoveHabit={removeHabit}
+              onMoveHabit={moveHabit}
+            />
+            <NotificationButton
+              notificationTime={notificationTime}
+              onPress={() => setShowTimePicker(true)}
+              disabled={habits.length === 0}
+            />
+          </>
         ) : (
           <EmptyState />
         )}
@@ -209,11 +216,6 @@ const ChainBuilder: React.FC<ChainBuilderProps> = ({ onSave }) => {
         <SaveChainButton
           onSave={saveChain}
           disabled={!chainName.trim() || habits.length === 0}
-        />
-
-        <NotificationButton
-          notificationTime={notificationTime}
-          onPress={() => setShowTimePicker(true)}
         />
       </Animated.View>
 
