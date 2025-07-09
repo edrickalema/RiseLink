@@ -1,5 +1,6 @@
+import TextInputField from "@/components/ui/text-input";
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 interface ChainDetailsFormProps {
   chainName: string;
@@ -16,28 +17,30 @@ export const ChainDetailsForm: React.FC<ChainDetailsFormProps> = ({
 }) => {
   return (
     <View style={styles.section}>
-      <Text style={styles.sectionTitle}>chain Details</Text>
+      <Text style={styles.sectionTitle}>chain details </Text>
 
       <View style={styles.card}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>chain Name</Text>
-          <TextInput
-            style={styles.input}
+          <Text style={styles.label}>chain Name </Text>
+
+          <TextInputField
             value={chainName}
-            onChangeText={onNameChange}
             placeholder='e.g., morning routine'
             placeholderTextColor='#9ca3af'
+            onChangeText={onNameChange}
+            style={styles.input}
           />
         </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>description</Text>
-          <TextInput
-            style={styles.input}
+
+          <TextInputField
             value={chainDescription}
-            onChangeText={onDescriptionChange}
             placeholder='e.g., start your day with energy'
+            onChangeText={onDescriptionChange}
             placeholderTextColor='#9ca3af'
+            style={styles.input}
             multiline
             numberOfLines={2}
           />

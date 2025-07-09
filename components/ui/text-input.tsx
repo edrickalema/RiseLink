@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput, KeyboardTypeOptions } from "react-native";
 
 type TextInputFieldProps = {
   chainDescription?: string;
@@ -8,6 +8,10 @@ type TextInputFieldProps = {
   onChangeText?: (text: string) => void;
   style?: object;
   placeholderTextColor?: string;
+  multiline?: boolean;
+  numberOfLines?: number;
+  keyboardType?: KeyboardTypeOptions
+  maxLength?: number
 };
 export default function TextInputField({
   placeholder = "e.g., Start your day with energy",
@@ -15,6 +19,10 @@ export default function TextInputField({
   style,
   value = "",
   onChangeText = (text: string) => {},
+  multiline = false,
+  numberOfLines = 1,
+  keyboardType,
+  maxLength,
 }: TextInputFieldProps) {
   return (
     <TextInput
@@ -23,6 +31,11 @@ export default function TextInputField({
       onChangeText={onChangeText}
       placeholder={placeholder || "e.g., Drink water, Meditate, Read"}
       placeholderTextColor={placeholderTextColor || "#9ca3af"}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
+      keyboardType={keyboardType}
+      maxLength={maxLength}
+      autoCapitalize='none'
     />
   );
 }

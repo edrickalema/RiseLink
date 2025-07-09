@@ -22,10 +22,13 @@ interface OnboardingScreenProps {
 }
 
 const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
+  const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
+
   const requestNotifications = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
     if (status === "granted") {
-      setStep(2);
+      setIsNotificationEnabled(status === "granted");
+      setStep(isNotificationEnabled ? 2 : 1); // Move to next step if notifications are enabled
     } else {
       // Optional: Show a warning or fallback
       alert("Please enable notifications to get timely habit reminders.");
@@ -42,15 +45,6 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
   const [step, setStep] = useState(0); // Start from step 0 (name input)
   const [name, setName] = useState("");
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
-
-  const goals = [
-    { id: "health", label: "Health & Fitness", icon: "💪" },
-    { id: "productivity", label: "Productivity", icon: "⚡" },
-    { id: "mindfulness", label: "Mindfulness", icon: "🧘" },
-    { id: "learning", label: "Learning", icon: "📚" },
-    { id: "creativity", label: "Creativity", icon: "🎨" },
-    { id: "relationships", label: "Relationships", icon: "❤️" },
-  ];
 
   const toggleGoal = (goalId: string) => {
     setSelectedGoals((prev) =>
@@ -142,10 +136,7 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                     <Button
                       variant='default'
                       // @ts-ignore
-                      style={[
-                        styles.button,
-                        !name.trim() && styles.buttonDisabled,
-                      ]}
+
                       onPress={() => setStep(1)}
                       disabled={!name.trim()}
                       size='lg'
@@ -173,19 +164,19 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                     entering={FadeInUp.duration(500)}
                     style={styles.title}
                   >
-                    Stay On Track
+                    stay on track
                   </Animated.Text>
                   <Animated.Text
                     entering={FadeInUp.delay(200).duration(500)}
                     style={styles.subtitle}
                   >
-                    Enable notifications to get daily habit chain reminders
+                    enable notifications to get daily habit chain reminders
                   </Animated.Text>
                 </View>
 
                 <Animated.View entering={FadeInUp.delay(400).duration(500)}>
                   <Button onPress={requestNotifications}>
-                    <Text style={styles.buttonText}>Allow Notifications</Text>
+                    <Text style={styles.buttonText}>allow notifications</Text>
                   </Button>
                 </Animated.View>
               </Animated.View>
@@ -207,13 +198,13 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                     entering={FadeInUp.delay(200).duration(500)}
                     style={styles.title}
                   >
-                    What are your goals?
+                    what are your goals? 🎯
                   </Animated.Text>
                   <Animated.Text
                     entering={FadeInUp.delay(400).duration(500)}
                     style={styles.subtitle}
                   >
-                    Select areas you'd like to improve
+                    select areas you'd like to improve
                   </Animated.Text>
                 </View>
 
@@ -239,18 +230,15 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
                 </View>
 
                 <Animated.View entering={FadeInUp.delay(600).duration(500)}>
-                  <TouchableOpacity
-                    style={[
-                      styles.button,
-                      selectedGoals.length === 0 && styles.buttonDisabled,
-                    ]}
+                  <Button
                     onPress={handleComplete}
                     disabled={selectedGoals.length === 0}
+                    size='lg'
                   >
                     <Text style={styles.buttonText}>
                       Start Building Habits →
                     </Text>
-                  </TouchableOpacity>
+                  </Button>
                 </Animated.View>
               </Animated.View>
             )}
@@ -325,26 +313,6 @@ const styles = StyleSheet.create({
     maxWidth: 340,
   },
 
-  button: {
-    width: "100%",
-    padding: 16,
-    backgroundColor: "#3b82f6",
-    borderRadius: 8,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  buttonDisabled: {
-    backgroundColor: "#9ca3af",
-    shadowOpacity: 0,
-    elevation: 0,
-  },
   buttonText: {
     color: "#ffffff",
     fontSize: 16,
@@ -360,7 +328,7 @@ const styles = StyleSheet.create({
     width: (width - 56) / 2, // Responsive width accounting for padding and gap
     padding: 16,
     borderWidth: 1,
-    borderColor: "#d1d5db",
+    borderColor: "transparent",
     borderRadius: 8,
     alignItems: "center",
     backgroundColor: "#ffffff",

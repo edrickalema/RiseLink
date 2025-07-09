@@ -55,7 +55,7 @@ const ChainBuilder: React.FC<ChainBuilderProps> = ({ onSave }) => {
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
-
+    
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,

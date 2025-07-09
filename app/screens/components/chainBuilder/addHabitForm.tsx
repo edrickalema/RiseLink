@@ -1,13 +1,8 @@
+import TextInputField from "@/components/ui/text-input";
 import { CurrentHabit } from "@/types";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface AddHabitFormProps {
   currentHabit: CurrentHabit;
@@ -36,7 +31,8 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
       <View style={styles.card}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>habit name</Text>
-          <TextInput
+
+          <TextInputField
             style={styles.input}
             value={currentHabit.name}
             onChangeText={handleNameChange}
@@ -47,7 +43,8 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
 
         <View style={styles.durationContainer}>
           <Text style={styles.label}>duration:</Text>
-          <TextInput
+
+          <TextInputField
             style={styles.durationInput}
             value={currentHabit.duration.toString()}
             onChangeText={handleDurationChange}
