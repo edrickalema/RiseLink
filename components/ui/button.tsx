@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
   GestureResponderEvent,
@@ -40,9 +41,10 @@ const Button: React.FC<ButtonProps> = ({
   const sizeStyle = stylesBySize[size];
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      disabled={disabled}
+    <LinearGradient
+      colors={["#1a1a2e", "#16213e", "#0f3460"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
       style={[
         styles.base,
         variantStyle.button,
@@ -51,17 +53,19 @@ const Button: React.FC<ButtonProps> = ({
         style,
       ]}
     >
-      <Text
-        style={[
-          styles.text,
-          variantStyle.text,
-          disabled && styles.disabledText,
-          textStyle,
-        ]}
-      >
-        {children}
-      </Text>
-    </TouchableOpacity>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
+        <Text
+          style={[
+            styles.text,
+            variantStyle.text,
+            disabled && styles.disabledText,
+            textStyle,
+          ]}
+        >
+          {children}
+        </Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 

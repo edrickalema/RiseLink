@@ -1,3 +1,4 @@
+import Button from "@/components/ui/button";
 import React, { useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -36,7 +37,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     >
       <View style={styles.overlay}>
         <View style={styles.modal}>
-          <Text style={styles.title}>Set Notification Time</Text>
+          <Text style={styles.title}>set notification time</Text>
 
           <View style={styles.timeContainer}>
             <View style={styles.timeSection}>
@@ -79,12 +80,15 @@ export const TimePicker: React.FC<TimePickerProps> = ({
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
-              <Text style={styles.cancelText}>Cancel</Text>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={onClose}
+            >
+              <Text style={styles.cancelText}>cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.confirmButton} onPress={confirm}>
-              <Text style={styles.confirmText}>Set Time</Text>
-            </TouchableOpacity>
+            <Button style={styles.confirmButton} onPress={confirm}>
+              <Text style={styles.confirmText}>set time</Text>
+            </Button>
           </View>
         </View>
       </View>

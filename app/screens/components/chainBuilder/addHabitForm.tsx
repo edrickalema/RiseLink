@@ -1,8 +1,8 @@
+import Button from "@/components/ui/button";
 import TextInputField from "@/components/ui/text-input";
 import { CurrentHabit } from "@/types";
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 interface AddHabitFormProps {
   currentHabit: CurrentHabit;
@@ -54,22 +54,13 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
           <Text style={styles.durationLabel}>minutes</Text>
         </View>
 
-        <TouchableOpacity
+        <Button
           style={styles.addButton}
           onPress={onAddHabit}
           disabled={!currentHabit.name.trim()}
         >
-          <LinearGradient
-            colors={
-              currentHabit.name.trim()
-                ? ["#3b82f6", "#1d4ed8"]
-                : ["#9ca3af", "#6b7280"]
-            }
-            style={styles.addButtonGradient}
-          >
-            <Text style={styles.addButtonText}>+ add habit</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+          <Text style={styles.addButtonText}>+ add habit</Text>
+        </Button>
       </View>
     </View>
   );

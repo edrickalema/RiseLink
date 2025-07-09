@@ -16,7 +16,9 @@ export const ChainHeader: React.FC<ChainHeaderProps> = ({
 }) => {
   return (
     <LinearGradient
-      colors={["#1e293b", "#334155", "#000"]}
+      colors={["#1a1a2e", "#16213e", "#0f3460"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
       style={styles.header}
     >
       <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -32,7 +34,7 @@ export const ChainHeader: React.FC<ChainHeaderProps> = ({
           },
         ]}
       >
-        <Text style={styles.title}>🔗 chain Builder</Text>
+        <Text style={styles.title}>🔗 chain builder</Text>
         <Text style={styles.subtitle}>create your perfect habit chain</Text>
       </Animated.View>
     </LinearGradient>

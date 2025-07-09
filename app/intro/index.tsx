@@ -205,7 +205,12 @@ export default function IntroScreen() {
             transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
           }}
         >
-          <Text className='text-[28px] leading-[36px] mb-[24px] max-w-[90%] text-center font-bold text-gray-800'>
+          <Text
+            style={{
+              fontFamily: "Geist_400Regular",
+            }}
+            className='text-[28px] leading-[36px] mb-[24px] max-w-[90%] text-center font-bold text-gray-800'
+          >
             {parseStyledText(step.title)}
           </Text>
         </Animated.View>
@@ -219,7 +224,7 @@ export default function IntroScreen() {
         >
           <Text
             className='leading-[26px] text-[18px] text-center max-w-[85%] text-gray-600'
-            style={{ marginVertical: 20 }}
+            style={{ marginVertical: 20, fontFamily: " Geist_400Regular" }}
           >
             {parseStyledText(step.subtitle)}
           </Text>
