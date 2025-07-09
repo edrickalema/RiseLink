@@ -215,8 +215,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   scrollContainer: {
     flexGrow: 1,

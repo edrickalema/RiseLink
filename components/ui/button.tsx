@@ -1,12 +1,11 @@
 import React from "react";
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
   GestureResponderEvent,
-  ViewStyle,
+  StyleSheet,
+  Text,
   TextStyle,
-  View,
+  TouchableOpacity,
+  ViewStyle,
 } from "react-native";
 
 type Variant =
