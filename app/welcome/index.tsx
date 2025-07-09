@@ -117,13 +117,13 @@ export default function WelcomeScreen() {
           ]}
         >
           <Animated.View style={{ marginBottom: 16 }}>
-            <View className='bg-white rounded-full p-4 shadow-lg'>
-              <Link size={48} color='#0f172a' />
+            <View className='rounded-full p-4 shadow-lg'>
+              <Link size={50} color='#0f172a' />
             </View>
           </Animated.View>
 
-          <Text className='text-3xl font-bold text-slate-800'>Welcome</Text>
-          <Text className='text-muted-foreground text-lg text-center mt-2'>
+          <Text className='text-[28px] font-bold text-slate-800'>Welcome</Text>
+          <Text className='text-muted-foreground text-[16px] text-center mt-2'>
             Build better habits, one link at a time
           </Text>
         </Animated.View>
@@ -215,8 +215,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   scrollContainer: {
     flexGrow: 1,

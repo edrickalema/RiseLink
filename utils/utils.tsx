@@ -1,24 +1,32 @@
 import { Dimensions } from "react-native";
-import Animated from "react-native-reanimated";
 
 export const introSteps = [
   {
+    id: 0,
+    title: "you think you're in control? 🤔",
+    subtitle:
+      "you scroll past hours of your day,\nmake promises you don’t keep,\nand call it a routine?\nlet’s be honest — **you’re not in control!**",
+    showGlow: false,
+  },
+  {
     id: 1,
-    title: "Feel scattered and stuck?",
-    subtitle: "Random habits and broken routines\nleaving you frustrated?",
+    title: "// feeling scattered and stuck? 😩",
+    subtitle:
+      "you **start strong**, but your routines ==fall apart==.\nyour habits feel **random**, disconnected, and hard to stick with.\nit’s frustrating to feel like you’re always starting over.",
     showGlow: false,
   },
   {
     id: 2,
-    title: "Most habit apps fail you.",
-    subtitle: "They track individual habits\ninstead of building life systems.",
+    title: "// why most habit apps fail you. 😟",
+    subtitle:
+      "they focus on **checking boxes** — not real change.\ntracking habits in ==isolation== doesn’t build **momentum**.\nyou need ==structure==, not scattered lists.",
     showGlow: false,
   },
   {
     id: 3,
-    title: "Design your ideal life.",
+    title: " // riselink helps you design your life. ✨",
     subtitle:
-      "Build connected routines that stack together\nand transform who you become.",
+      "instead of tracking habits alone, you’ll **build connected routines**\nthat support your **goals** and shape your ==identity==.\nit’s not just about habits — it’s about becoming **who you want to be**.",
     showGlow: false,
     isLastStep: true,
   },
@@ -37,4 +45,3 @@ export const predefinedHabits = [
   { id: "learning", label: "Learning", emoji: "📚" },
   { id: "custom", label: "Something Else", emoji: "✨" },
 ];
-

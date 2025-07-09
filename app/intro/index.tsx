@@ -1,3 +1,4 @@
+import { parseStyledText } from "@/components/parsedTexts";
 import Button from "@/components/ui/button";
 import { introSteps } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
@@ -205,7 +206,7 @@ export default function IntroScreen() {
           }}
         >
           <Text className='text-[28px] leading-[36px] mb-[24px] max-w-[90%] text-center font-bold text-gray-800'>
-            {step.title}
+            {parseStyledText(step.title)}
           </Text>
         </Animated.View>
 
@@ -220,7 +221,7 @@ export default function IntroScreen() {
             className='leading-[26px] text-[18px] text-center max-w-[85%] text-gray-600'
             style={{ marginVertical: 20 }}
           >
-            {step.subtitle}
+            {parseStyledText(step.subtitle)}
           </Text>
         </Animated.View>
 
