@@ -3,7 +3,7 @@ export const introSteps = [
     id: 1,
     title: "Feel scattered and stuck?",
     subtitle: "Random habits and broken routines\nleaving you frustrated?",
-    showGlow: true,
+    showGlow: false,
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ export const introSteps = [
     title: "Design your ideal life.",
     subtitle:
       "Build connected routines that stack together\nand transform who you become.",
-    showGlow: true,
+    showGlow: false,
     isLastStep: true,
   },
 ];
