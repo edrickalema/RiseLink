@@ -140,7 +140,7 @@ export default function WelcomeScreen() {
         >
           <View style={styles.featureCard}>
             <Target size={32} color='#3b82f6' />
-            <Text style={styles.featureText}>Goal Tracking</Text>
+            <Text style={styles.featureText}>Habit Tracking</Text>
           </View>
           <View style={styles.featureCard}>
             <TrendingUp size={32} color='#22c55e' />
