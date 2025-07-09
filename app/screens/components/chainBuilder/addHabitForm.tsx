@@ -31,11 +31,11 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
 
   return (
     <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Add New Habit</Text>
+      <Text style={styles.sectionTitle}>add new habit</Text>
 
       <View style={styles.card}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Habit Name</Text>
+          <Text style={styles.label}>habit name</Text>
           <TextInput
             style={styles.input}
             value={currentHabit.name}
@@ -46,7 +46,7 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
         </View>
 
         <View style={styles.durationContainer}>
-          <Text style={styles.label}>Duration:</Text>
+          <Text style={styles.label}>duration:</Text>
           <TextInput
             style={styles.durationInput}
             value={currentHabit.duration.toString()}
@@ -70,7 +70,7 @@ export const AddHabitForm: React.FC<AddHabitFormProps> = ({
             }
             style={styles.addButtonGradient}
           >
-            <Text style={styles.addButtonText}>+ Add Habit</Text>
+            <Text style={styles.addButtonText}>+ add habit</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>

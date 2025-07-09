@@ -16,11 +16,11 @@ export const ChainDetailsForm: React.FC<ChainDetailsFormProps> = ({
 }) => {
   return (
     <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Chain Details</Text>
+      <Text style={styles.sectionTitle}>chain Details</Text>
 
       <View style={styles.card}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Chain Name</Text>
+          <Text style={styles.label}>chain Name</Text>
           <TextInput
             style={styles.input}
             value={chainName}
@@ -31,7 +31,7 @@ export const ChainDetailsForm: React.FC<ChainDetailsFormProps> = ({
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Description</Text>
+          <Text style={styles.label}>description</Text>
           <TextInput
             style={styles.input}
             value={chainDescription}

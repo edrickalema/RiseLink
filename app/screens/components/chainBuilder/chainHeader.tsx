@@ -32,8 +32,8 @@ export const ChainHeader: React.FC<ChainHeaderProps> = ({
           },
         ]}
       >
-        <Text style={styles.title}>🔗 Chain Builder</Text>
-        <Text style={styles.subtitle}>Create your perfect habit chain</Text>
+        <Text style={styles.title}>🔗 chain Builder</Text>
+        <Text style={styles.subtitle}>create your perfect habit chain</Text>
       </Animated.View>
     </LinearGradient>
   );

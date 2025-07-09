@@ -1,6 +1,6 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 interface SaveChainButtonProps {
   onSave: () => void;
@@ -21,7 +21,7 @@ export const SaveChainButton: React.FC<SaveChainButtonProps> = ({
         colors={disabled ? ["#9ca3af", "#6b7280"] : ["#10b981", "#059669"]}
         style={styles.saveButtonGradient}
       >
-        <Text style={styles.saveButtonText}>💾 Save Chain</Text>
+        <Text style={styles.saveButtonText}>💾 save chain</Text>
       </LinearGradient>
     </TouchableOpacity>
   );

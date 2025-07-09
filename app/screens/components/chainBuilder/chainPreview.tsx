@@ -21,7 +21,7 @@ export const ChainPreview: React.FC<ChainPreviewProps> = ({
   return (
     <View style={styles.section}>
       <View style={styles.previewHeader}>
-        <Text style={styles.sectionTitle}>Chain Preview</Text>
+        <Text style={styles.sectionTitle}>chain preview</Text>
         <View style={styles.previewStats}>
           <Text style={styles.statsText}>
             {habits.length} habits • {totalDuration} min total
