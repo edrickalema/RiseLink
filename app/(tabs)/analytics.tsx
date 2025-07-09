@@ -1,11 +1,12 @@
+import ScreenWrapper from "@/components/ui/wrapper";
 import React from "react";
 import { Text, View } from "react-native";
 
 const AnalyticsTabScreen = () => {
   return (
-    <View>
+    <ScreenWrapper>
       <Text>analytics</Text>
-    </View>
+    </ScreenWrapper>
   );
 };
 

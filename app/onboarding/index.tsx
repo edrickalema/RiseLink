@@ -1,13 +1,12 @@
-import { height, predefinedHabits } from "@/utils/utils";
+import { height, predefinedHabits, width } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Notifications from "expo-notifications";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 
 import Button from "@/components/ui/button";
 import { Bell } from "lucide-react-native";
 import {
-  Dimensions,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -17,8 +16,6 @@ import {
   View,
 } from "react-native";
 import Animated, { FadeIn, FadeInUp, ZoomIn } from "react-native-reanimated";
-
-const { width } = Dimensions.get("window");
 
 interface OnboardingScreenProps {
   onComplete: (userData: { name: string; goals: string[] }) => void;
@@ -64,7 +61,10 @@ const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
   };
 
   const handleComplete = () => {
-    onComplete({ name, goals: selectedGoals });
+    // Here you would typically save the user's data to your backend or state management
+    // onComplete({ name, goals: selectedGoals });
+    console.log("User Data:", { name, goals: selectedGoals });
+    router.replace("/(tabs)"); // Navigate to home after completion
   };
 
   return (
