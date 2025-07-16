@@ -118,7 +118,7 @@ export default function WelcomeScreen() {
 
           <Text className='text-[28px] font-bold text-slate-800'>welcome</Text>
           <Text className='text-muted-foreground text-[16px] text-center mt-2'>
-            build better habits, one link at a time
+            build better habits, one chain at a time
           </Text>
         </Animated.View>
 
