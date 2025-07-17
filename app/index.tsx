@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Button, Image, Text, View } from "react-native";
 
@@ -12,6 +12,8 @@ const WelcomeScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const isOnboardingComplete = false; // mock value
 
+  // Router for navigation
+  const router = useRouter();
   useEffect(() => {
     const timer = setTimeout(() => {
       const introComplete = mockStorage["@breakfree:intro_complete"];

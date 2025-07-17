@@ -1,7 +1,7 @@
 import { height, predefinedHabits, width } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Notifications from "expo-notifications";
-import { router, useNavigation } from "expo-router";
+import { useRouter, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 
 import Button from "@/components/ui/button";
@@ -23,7 +23,10 @@ interface OnboardingScreenProps {
 
 const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
   const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
+  // Router for navigation
+  const router = useRouter();
 
+  
   const requestNotifications = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
     if (status === "granted") {

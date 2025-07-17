@@ -2,7 +2,7 @@ import { parseStyledText } from "@/components/parsedTexts";
 import Button from "@/components/ui/button";
 import { introSteps } from "@/utils/utils";
 import { LinearGradient } from "expo-linear-gradient";
-import { router, useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Animated, Dimensions, Text, View } from "react-native";
 
@@ -17,7 +17,8 @@ const { width, height } = Dimensions.get("window");
 
 export default function IntroScreen() {
   const [currentStep, setCurrentStep] = useState(0);
-
+  // Router for navigation
+  const router = useRouter();
   // Animation values
   const fadeAnim = new Animated.Value(0);
   const slideAnim = new Animated.Value(50);
